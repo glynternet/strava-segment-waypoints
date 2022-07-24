@@ -21,7 +21,7 @@ func main() {
 	token, segmentIDs, err := setup()
 	if err != nil {
 		_, _ = fmt.Fprintf(os.Stderr, "Error: %s\n", err.Error())
-		_, _ = fmt.Println(usage)
+		_, _ = fmt.Fprintln(os.Stderr, usage)
 		os.Exit(22)
 	}
 	if err := writeSegments(os.Stdout, token, segmentIDs...); err != nil {
