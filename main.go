@@ -109,7 +109,7 @@ func segmentWaypoints(segmentID int64, token string) ([]gpx.GPXPoint, error) {
 		},
 		Name:   segment.Name + " (start)",
 		Source: url,
-		Symbol: "Flag, Red",
+		Symbol: "Flag, Green",
 		Type:   "user",
 	}, {
 		Point: gpx.Point{
@@ -119,7 +119,7 @@ func segmentWaypoints(segmentID int64, token string) ([]gpx.GPXPoint, error) {
 		},
 		Name:   segment.Name + " (end)",
 		Source: url,
-		Symbol: "Flag, Green",
+		Symbol: "Flag, Red",
 		Type:   "user",
 	}}, nil
 }
