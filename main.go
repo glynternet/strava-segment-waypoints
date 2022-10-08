@@ -110,17 +110,19 @@ func segmentWaypoints(segmentID int64, token string) ([]gpx.GPXPoint, error) {
 			Longitude: segment.Start[1],
 			Elevation: gpx.NullableFloat64{},
 		},
-		Name:   segment.Name + " (start)",
-		Symbol: "Flag, Green",
-		Type:   "user",
+		Name:        segment.Name + " (start)",
+		Description: fmt.Sprintf("Strava segment %d start", segmentID),
+		Symbol:      "Flag, Green",
+		Type:        "user",
 	}, {
 		Point: gpx.Point{
 			Latitude:  segment.End[0],
 			Longitude: segment.End[1],
 			Elevation: gpx.NullableFloat64{},
 		},
-		Name:   segment.Name + " (end)",
-		Symbol: "Flag, Red",
-		Type:   "user",
+		Name:        segment.Name + " (finish)",
+		Description: fmt.Sprintf("Strava segment %d finish", segmentID),
+		Symbol:      "Flag, Red",
+		Type:        "user",
 	}}, nil
 }
