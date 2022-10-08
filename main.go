@@ -101,6 +101,9 @@ func segmentWaypoints(segmentID int64, token string) ([]gpx.GPXPoint, error) {
 	if err := json.NewDecoder(res.Body).Decode(&segment); err != nil {
 		return nil, fmt.Errorf("decoding segment response for segment ID:%q: %w", segmentID, err)
 	}
+	// Do not include Source field (src tag) in gpx.Point below as it may cause waypoints
+	// to not be able to be successfully uploaded.
+	// https://github.com/glynternet/strava-segment-waypoints/issues/2
 	return []gpx.GPXPoint{{
 		Point: gpx.Point{
 			Latitude:  segment.Start[0],
@@ -108,7 +111,6 @@ func segmentWaypoints(segmentID int64, token string) ([]gpx.GPXPoint, error) {
 			Elevation: gpx.NullableFloat64{},
 		},
 		Name:   segment.Name + " (start)",
-		Source: url,
 		Symbol: "Flag, Green",
 		Type:   "user",
 	}, {
@@ -118,7 +120,6 @@ func segmentWaypoints(segmentID int64, token string) ([]gpx.GPXPoint, error) {
 			Elevation: gpx.NullableFloat64{},
 		},
 		Name:   segment.Name + " (end)",
-		Source: url,
 		Symbol: "Flag, Red",
 		Type:   "user",
 	}}, nil
